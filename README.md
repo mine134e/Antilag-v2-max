@@ -1,5 +1,4 @@
 # Antilag-v2-max
-Credit by @PepsiMannumero1
 --[[
 Antilag Total: remove efeitos visuais (partÃ­culas, luzes, smoke, sparkles, trails, fire etc)
 em tudo: mapa, personagens, NPCs, acessÃ³rios, ferramentas e objetos de missÃ£o.
