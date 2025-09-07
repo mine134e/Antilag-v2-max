@@ -1,9 +1,7 @@
-# Antilag-v2-max
 --[[
-Antilag Total: remove efeitos visuais (partÃ­culas, luzes, smoke, sparkles, trails, fire etc)
-em tudo: mapa, personagens, NPCs, acessÃ³rios, ferramentas e objetos de missÃ£o.
-SÃ³ NÃƒO remove: GUIs/ScreenGuis/SurfaceGui/BillboardGui/Decals/SelectionBox/Handles/BoxHandleAdornment
-NotificaÃ§Ã£o sÃ³ na primeira execuÃ§Ã£o. 100% LocalScript seguro (StarterPlayerScripts)
+Antilag: remove sÃ³ efeitos visuais (partÃ­culas, luzes, trilhas, fumaÃ§a, faÃ­sca, fogo)
+em tudo (mapa, personagens, NPCs, acessÃ³rios), MAS NUNCA desativa/remover GUIs, Decal, BillboardGui, SurfaceGui, SelectionBox, Handles, BoxHandleAdornment, Highlight.
+Protege toda interface de missÃ£o, objetivo, tempo, distÃ¢ncia, seta, etc.
 ]]
 
 local Players = game:GetService("Players")
@@ -18,13 +16,18 @@ local lastRun = 0
 local notificouAntilag = false
 
 local function isVisualProtected(obj)
-    -- SÃ³ protege Gui, Decal, adornos de interface (nÃ£o efeitos de partes)
-    if obj:IsA("BillboardGui") or obj:IsA("SurfaceGui") or obj:IsA("ScreenGui")
-    or obj:IsA("SelectionBox") or obj:IsA("Handles") or obj:IsA("BoxHandleAdornment")
-    or obj:IsA("Decal") or obj:IsA("UIComponent") or obj:IsA("Highlight") then
-        return true
-    end
-    return false
+    -- Protege interfaces de missÃ£o, tempo, distÃ¢ncia, seta, objetivo, etc.
+    return (
+        obj:IsA("BillboardGui")
+        or obj:IsA("SurfaceGui")
+        or obj:IsA("ScreenGui")
+        or obj:IsA("SelectionBox")
+        or obj:IsA("Handles")
+        or obj:IsA("BoxHandleAdornment")
+        or obj:IsA("Decal")
+        or obj:IsA("UIComponent")
+        or obj:IsA("Highlight")
+    )
 end
 
 local function processarLotes(lista, func, lote)
@@ -153,7 +156,7 @@ local function simplificarTudo()
 
     if not notificouAntilag then
         notificouAntilag = true
-        mostrarNotificacao("Antilag ativado! (Efeitos removidos de tudo)", 3)
+        mostrarNotificacao("Antilag ativado! (Efeitos removidos de tudo, interface protegida)", 3)
     end
 
     running = false
